@@ -20,27 +20,28 @@ function searchCountryByQuery(event) {
   if (!country) {
     clearCountries();
     return;
+  } else {
+    restcountriesApi
+      .fetchCountries(country)
+      .then(data => {
+        if (data.length > 10) {
+          listEl.innerHTML = '';
+          Notify.info(
+            'Too many matches found. Please enter a more specific name.'
+          );
+        } else if (data.length >= 2 && data.length <= 10) {
+          listEl.innerHTML = createCountryList(data);
+          countryInfoEl.innerHTML = '';
+        } else {
+          listEl.innerHTML = '';
+          countryInfoEl.innerHTML = createCountryInfoCard(data);
+        }
+      })
+      .catch(err => {
+        Notify.failure('Oops, there is no country with that name');
+        clearCountries();
+      });
   }
-  restcountriesApi
-    .fetchCountries(country)
-    .then(data => {
-      if (data.length > 10) {
-        listEl.innerHTML = '';
-        Notify.info(
-          'Too many matches found. Please enter a more specific name.'
-        );
-      } else if (data.length >= 2 && data.length <= 10) {
-        listEl.innerHTML = createCountryList(data);
-        countryInfoEl.innerHTML = '';
-      } else {
-        listEl.innerHTML = '';
-        countryInfoEl.innerHTML = createCountryInfoCard(data);
-      }
-    })
-    .catch(err => {
-      Notify.failure('Oops, there is no country with that name');
-      clearCountries();
-    });
 }
 function clearCountries() {
   listEl.innerHTML = '';
