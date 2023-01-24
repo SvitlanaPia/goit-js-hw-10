@@ -1,5 +1,5 @@
 export const createCountryList = countryInfo => {
-  countryArr = countryInfo.map(el => {
+  const countryArr = countryInfo.map(el => {
     return `
     <li class="country-list__item">
         <img class="country-list__icon" src="${el.flags.svg}" alt="country flag" width="30px"/>
@@ -10,7 +10,7 @@ export const createCountryList = countryInfo => {
 };
 
 export const createCountryInfoCard = countryInfo => {
-  countryArr = countryInfo.map(el => {
+  const countryArr = countryInfo.map(el => {
     return `
             <div class="country-info__name">
                 <img class="country-list__icon" src="${
