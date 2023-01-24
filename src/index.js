@@ -39,8 +39,8 @@ function searchCountryByQuery(event) {
       })
       .catch(err => {
         console.log(err);
-        // Notify.failure('Oops, there is no country with that name');
-        // clearCountries();
+        Notify.failure('Oops, there is no country with that name');
+        clearCountries();
       });
   }
 }
